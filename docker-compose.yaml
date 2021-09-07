@@ -1,0 +1,30 @@
+version: '3.7'
+
+networks:
+  postgres:
+
+services:
+
+  postgres:
+    image: postgres:13.3
+    container_name: postgres
+    networks: 
+      - postgres
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: root
+    volumes: 
+      - ./postgres_data:/var/lib/postgresql/data
+  
+  pgadmin:
+    image: dpage/pgadmin4:5.3
+    container_name: pgadmin
+    networks: 
+      - postgres
+    environment:
+      - PGADMIN_DEFAULT_EMAIL=user@domain.com
+      - PGADMIN_DEFAULT_PASSWORD=root
+    ports:
+      - 80:80
+    volumes: 
+      - ./pgadmin:/var/lib/pgadmin
