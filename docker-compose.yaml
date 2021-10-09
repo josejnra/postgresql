@@ -6,7 +6,7 @@ networks:
 services:
 
   postgres:
-    image: postgres:13.4
+    image: postgres:14.0
     container_name: postgres
     networks: 
       - postgres
@@ -17,7 +17,7 @@ services:
       - ./postgres_data:/var/lib/postgresql/data
   
   pgadmin:
-    image: dpage/pgadmin4:5.6
+    image: dpage/pgadmin4:6
     container_name: pgadmin
     networks: 
       - postgres
@@ -25,6 +25,18 @@ services:
       - PGADMIN_DEFAULT_EMAIL=user@domain.com
       - PGADMIN_DEFAULT_PASSWORD=root
     ports:
-      - 80:80
+      - 8080:80
     volumes: 
       - ./pgadmin:/var/lib/pgadmin
+
+  cloudbeaver:
+    image: dbeaver/cloudbeaver:21.1.5
+    container_name: cloudbeaver
+    networks:
+      - postgres
+    ports: 
+      - 8978:8978
+    volumes: 
+      - ./dbeaver/workspace:/opt/cloudbeaver/workspace
+    # user: cbadmin
+    # pass: password
