@@ -6,5 +6,5 @@ docker-compose up -d
 ```
 Then,
 ```shell
-sudo chmod 777 pgadmin
+sudo chmod 777 pgadmin omnidb_server
 ```
