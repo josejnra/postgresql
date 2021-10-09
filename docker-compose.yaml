@@ -40,3 +40,15 @@ services:
       - ./dbeaver/workspace:/opt/cloudbeaver/workspace
     # user: cbadmin
     # pass: password
+    
+  omnidb:
+    image: omnidbteam/omnidb:3.0.3b
+    container_name: omnidb
+    networks: 
+      - postgres
+    ports:
+      - 8000:8000
+    volumes: 
+      - ./omnidb_server:/home/omnidb/.omnidb/omnidb-server
+    
+    # docker exec -it omnidb python omnidb-server.py --createsuperuser=root pass
